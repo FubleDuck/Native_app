@@ -1,0 +1,53 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content id="back-koulchi" class="card-background-page">
+
+    <ion-card (tap)="goToBluetooth()">
+        <img src="assets/Bluetooth.jpg" />
+        <div class="card-title">Bluetooth</div>
+        <div class="card-subtitle">Bluetooth</div>
+    </ion-card>
+
+    <ion-card>
+        <img (tap)="goToWifi()" src="assets/wifi.jpeg" />
+        <div class="card-title1">Wifi-Control</div>
+        <div class="card-subtitle"></div>
+    </ion-card>
+
+    <ion-card>
+        <img (tap)="goTovoice()" src="assets/imgs/voice.png" />
+        <div class="card-title2">Voice Control</div>
+        <div class="card-subtitle"></div>
+    </ion-card>
+
+    <ion-card>
+        <img src="assets/gyro.png" />
+        <div class="card-title1">Gyroscope</div>
+        <div class="card-subtitle"></div>
+    </ion-card>
+
+    <ion-card>
+        <img src="assets/imgs/presence.png" />
+        <div class="card-title3">Presence</div>
+        <div class="card-subtitle">Membre</div>
+    </ion-card>
+
+    <ion-card>
+        <img (tap)="goToDist()" src="assets/dist.png" />
+        <div class="card-title1">Distance</div>
+        <div class="card-subtitle">Distaaaaaaaaance</div>
+    </ion-card>
+
+    <ion-card (tap)="goToAbout()">
+        <img src="assets/about.jpeg" />
+        <div class="card-title"></div>
+        <div class="card-subtitle"></div>
+    </ion-card>
+
+
+    <ion-fab right bottom>
+        <button (tap)="goHome()" ion-fab color="dark"><ion-icon name="home"></ion-icon></button>
+    </ion-fab>
+</ion-content>

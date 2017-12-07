@@ -1,0 +1,101 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content>
+    <h5 style="text-align: center">Welcome {{nom}} to the bluetooth interface</h5>
+
+
+
+    <ion-list padding>
+        <div *ngIf="conCheck == true" id="conN">
+            <h5 style="color:green; text-align:center">Connected</h5>
+        </div>
+        <div *ngIf="conCheck == false " id="notConn">
+            <button ion-button block color="dark" (click)="startScanning()">scan</button>
+            <ion-list-header>
+                Paired Devices
+            </ion-list-header>
+            <ion-item *ngFor="let device of pairedDevices">
+                {{device.name}}
+            </ion-item>
+        </div>
+        <div *ngIf="conCheck == true" id="conN">
+            <button ion-button block color="danger" (click)="disconnect()">Disconnect</button>
+        </div>
+        <div *ngIf="conCheck == false " id="notConn">
+            <ion-list-header>
+                availlable Devices
+            </ion-list-header>
+            <ion-item *ngFor='let device of unpairedDevices'>
+                <span (click)="selectDevice(device.address)">
+            {{device.name}}
+          </span>
+            </ion-item>
+            <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+        </div>
+    </ion-list>
+    <div *ngIf="conCheck == false ">
+        <button ion-button block color="dark" (tap)="isConn()">Collapse</button>
+    </div>
+
+    <div *ngIf="conCheck == true">
+        <button ion-button block color="dark" (tap)="isConn()">Expand</button>
+    </div>
+
+
+    <div *ngIf="conCheck == true ">
+        <br><br>
+        <ion-grid>
+            <ion-row text-center>
+                <ion-col col-4>
+
+                </ion-col>
+                <ion-col col-4>
+                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendA()" (touchend)="sendS()" ion-button round outline icon-only>
+                                <ion-icon name="arrow-dropup"></ion-icon>
+                              </button>
+                </ion-col>
+                <ion-col col-4>
+
+                </ion-col>
+            </ion-row>
+
+            <ion-row text-center>
+                <ion-col col-4>
+                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendB()" (touchend)="sendS()" ion-button round outline icon-only>
+                                <ion-icon name="arrow-dropleft"></ion-icon>
+                              </button>
+                </ion-col>
+                <ion-col col-4>
+                    <p>"{{ sVar }}"</p>
+                </ion-col>
+                <ion-col col-4>
+                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendC()" (touchend)="sendS()" ion-button round outline icon-only>
+                        <ion-icon name="arrow-dropright"></ion-icon>
+                        </button>
+                </ion-col>
+            </ion-row>
+
+            <ion-row text-center>
+                <ion-col col-4>
+
+                </ion-col>
+                <ion-col col-4>
+                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendD()" (touchend)="sendS()" ion-button round outline icon-only>
+                                    <ion-icon name="arrow-dropdown"></ion-icon>
+                                  </button>
+                </ion-col>
+                <ion-col col-4>
+
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <br><br>
+
+
+    </div>
+
+
+
+</ion-content>

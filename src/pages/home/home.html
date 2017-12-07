@@ -1,0 +1,126 @@
+<ion-header no-border>
+
+    <ion-list>
+        <ion-item color="dark">
+            <ion-avatar item-start>
+                <img src="assets/me.jpg">
+            </ion-avatar>
+            <ion-avatar center item-start>
+                <img src="assets/imgs/logo.png" />
+            </ion-avatar>
+            <h2>Aymano Kas</h2>
+            <p>Media Cell</p>
+        </ion-item>
+    </ion-list>
+
+
+</ion-header>
+
+<ion-content padding scrool="false">
+
+
+    <!-- <ion-grid style=" display: flex; align-items: center; justify-content: center;">
+        <ion-row>
+            <ion-col col-3>
+                <a href="#">
+                    <ion-icon style="font-size: 30px; color:#3b5998;" name="logo-facebook"> &nbsp; &nbsp;</ion-icon>
+                </a>
+            </ion-col>
+
+            <ion-col col-3>
+                <a href="#">
+                    <ion-icon style="font-size: 30px; color:#00aced;" name="logo-twitter"> &nbsp; &nbsp;</ion-icon>
+                </a>
+            </ion-col>
+
+            <ion-col col-3>
+                <a href="#">
+                    <ion-icon style="font-size: 30px; color : #dd4b39;" name="logo-googleplus"></ion-icon>
+                </a>
+            </ion-col>
+
+            <ion-col col-3>
+                <a href="#">
+                    <ion-icon style="font-size: 30px; color : #dd4b39;" name="logo-github"></ion-icon>
+                </a>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>-->
+
+
+
+
+
+
+    <ion-item>
+        <ion-label floating>Your Name</ion-label>
+        <ion-input [(ngModel)]="nom" type="text"></ion-input>
+    </ion-item>
+
+
+
+    <ion-grid>
+
+        <ion-row>
+            <ion-col col-6>
+                <button id="goToPageKoulchi" (tap)="goToKoulchi()" color="dark" ion-button round>Get Control</button>
+            </ion-col>
+
+            <ion-col col-6 *ngIf="shPics == false">
+                <button id="goToPageKoulchi" (tap)="showAbout()" ion-button icon-right round color="dark">
+          About us
+          <ion-icon name="md-information-circle"></ion-icon>
+        </button>
+            </ion-col>
+
+            <ion-col col-6 *ngIf="shPics == true">
+                <button id="goToPageKoulchi" (tap)="showAbout()" ion-button icon-right round color="secondary">
+          Hide :p
+          <ion-icon name="md-information-circle"></ion-icon>
+        </button>
+            </ion-col>
+
+        </ion-row>
+
+
+    </ion-grid>
+
+
+    <img *ngIf="shPics == false" src="assets/geek.png">
+
+
+    <div *ngIf="shPics == true">
+
+
+        <img style="border-radius: 40px" src="assets/nassClub.jpg">
+    </div>
+</ion-content>
+
+<ion-footer no-border>
+    <p style="text-align:center;">
+        <ion-icon id="heart" style="color:red;font-size:25px;" name="heart"> </ion-icon> &nbsp; & &nbsp;
+        <ion-icon style="color:orange; font-size:25px;" name="pizza"> </ion-icon>
+    </p>
+    <ion-row style=" display: flex; align-items: center; justify-content: center;">
+        <a href="#">
+            <img style="height:30px" src="assets/octocat.png">
+        </a>
+        <h6>Ripo dyal l'app for dev</h6>
+        <a href="#">
+            <img style="height:30px" src="assets/octocat.png">
+        </a>
+    </ion-row>
+    <!--<ion-item>
+
+        <p style="text-align:center">Made with &nbsp;
+            <ion-icon style="color:red" name="heart"> </ion-icon> &nbsp; & &nbsp;
+            <ion-icon style="color:orange" name="pizza"> </ion-icon>
+
+        </p>
+
+    </ion-item>-->
+
+
+
+</ion-footer>

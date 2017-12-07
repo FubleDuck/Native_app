@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar color="dark">
+        <ion-title>Office Members</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="tutorial-page card-background-page">
+
+    <ion-slides pager>
+        <ion-slide *ngFor="let slide of slides">
+
+            <img style="border-radius: 20px" [src]="slide.image" class="slide-image" />
+            <ion-card center>
+                <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+                <p [innerHTML]="slide.description"></p>
+            </ion-card>
+        </ion-slide>
+        <ion-slide>
+            <ion-toolbar>
+            </ion-toolbar>
+            <img src="assets/office/tobecon.jpg" class="slide-image" />
+            <h2 class="slide-title">The end !</h2>
+
+        </ion-slide>
+    </ion-slides>
+
+    <ion-fab right bottom>
+        <button (tap)="goHome()" ion-fab color="dark"><ion-icon name="home"></ion-icon></button>
+    </ion-fab>
+</ion-content>
