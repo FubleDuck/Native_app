@@ -36,8 +36,12 @@ $ npm install -g cordova ionic
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-$ cd /yourPath/IonicAndroid_IosApp
+$ cd /yourPath/Native_App
 $ (sudo) npm install -d
+$ ionic cordova platform add android
+or
+$ ionic cordova platform add ios
+$ ionic cordova build android
 $ ionic serve
 ```
 
