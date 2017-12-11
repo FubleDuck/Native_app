@@ -22,33 +22,75 @@ export class HomePage {
   }
  
   
-    private showAbout(){
+    showAbout(){
     this.shPics = !this.shPics;
     }
   
   
-    private goToKoulchi(){
+     goToKoulchi(){
+      if (this.nom == undefined){
+        let alert = this.alertCtrl.create({
+          cssClass: 'alertCss',
+          title: 'Ur name please ?? ',
+          subTitle: "",
+          buttons: [
+            {
+              text: 'Enter ur name',
+              role : 'cancel',
+              handler: () => {
+                console.log('go back clicked');
+               
+              }
+            }],
+        
+        });
+        alert.present();
+      }
+else {
     this.navCtrl.push(KoulchiPage,{
         nom : this.nom,
         email : this.email,
     });
-    if (this.nom == undefined){
-      let alert = this.alertCtrl.create({
-        title: 'Dekhel smeytek :(',
-        subTitle: "",
-        buttons: [
-          {
-            text: 'Go Back',
-            handler: () => {
-              console.log('go back clicked');
-              this.navCtrl.push(HomePage)
-            }
-          }],
-      
-      });
-      alert.present();
-    }
+  }
     
+  }
+
+  public popUpHome(){
+    let alert = this.alertCtrl.create({
+      cssClass: 'alertCss',
+      title: 'Hello !',
+      subTitle: "Please enter your Name and click on " + "<strong>'Get Control'</strong>",
+      buttons: [
+        {
+          text: 'Okay',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+            
+          }
+        }],
+    
+    });
+    alert.present();
+  }
+
+  public popUpMe(){
+    let alert = this.alertCtrl.create({
+      cssClass: 'alertCss',
+      title: "Hey !",
+      subTitle: "Welcome a million time :) ",
+      buttons: [
+        {
+          text: 'OK',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+            
+          }
+        }],
+    
+    });
+    alert.present();
   }
 
 }

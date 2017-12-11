@@ -10,14 +10,14 @@
         <div class="card-subtitle">Bluetooth</div>
     </ion-card>
 
-    <ion-card>
-        <img (tap)="goToWifi()" src="assets/wifi.jpeg" />
+    <ion-card (tap)="goToWifi()">
+        <img src="assets/wifi.jpeg" />
         <div class="card-title1">Wifi-Control</div>
         <div class="card-subtitle"></div>
     </ion-card>
 
-    <ion-card>
-        <img (tap)="goTovoice()" src="assets/imgs/voice.png" />
+    <ion-card (tap)="goTovoice()">
+        <img src="assets/imgs/voice.png" />
         <div class="card-title2">Voice Control</div>
         <div class="card-subtitle"></div>
     </ion-card>
@@ -30,8 +30,8 @@
 
     <ion-card>
         <img src="assets/imgs/presence.png" />
-        <div class="card-title3">Presence</div>
-        <div class="card-subtitle">Membre</div>
+        <div class="card-title3"></div>
+        <div class="card-subtitle"></div>
     </ion-card>
 
     <ion-card>
@@ -48,6 +48,11 @@
 
 
     <ion-fab right bottom>
-        <button (tap)="goHome()" ion-fab color="dark"><ion-icon name="home"></ion-icon></button>
+        <button ion-fab color="dark"><ion-icon name="arrow-dropup"></ion-icon></button>
+        <ion-fab-list side="top">
+            <a href="https://www.facebook.com/aymano.kas"> <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button></a>
+            <a href="https://twitter.com/AaymanoO?lang=en"><button ion-fab><ion-icon name="logo-twitter"></ion-icon></button></a>
+            <a href="https://plus.google.com/u/0/108517497719178514151"> <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button></a>
+        </ion-fab-list>
     </ion-fab>
 </ion-content>

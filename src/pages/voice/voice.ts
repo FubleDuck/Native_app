@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController,NavParams } from 'ionic-angular';
+import { Component , ChangeDetectorRef } from '@angular/core';
+import { NavController,NavParams,Platform } from 'ionic-angular';
 
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 import { AlertController } from 'ionic-angular';
@@ -24,40 +24,64 @@ pairedDevices: any;
 gettingDevices: Boolean;
 conCheck: Boolean = false;
 
+matches : Array<string>  = [];
 
 
-  constructor(public navCtrl: NavController, private navParams : NavParams, private bluetoothSerial: BluetoothSerial,private alertCtrl: AlertController,private speechRecognition: SpeechRecognition) {
-    bluetoothSerial.enable();
+
+  constructor(
+    public platform :Platform,
+    public changeDetectorRef : ChangeDetectorRef,
+    public navCtrl: NavController,
+    private navParams : NavParams, 
+    private bluetoothSerial: BluetoothSerial,
+    private alertCtrl: AlertController,
+    private speechRecognition: SpeechRecognition) {
     
+    this.platform.ready().then((readySource) => {
+          console.log('Platform ready from', readySource);
+          // Platform now ready, execute any required native code
+          bluetoothSerial.enable();
+          this.speechRecognition.hasPermission().then((hasPermission: boolean) => {
+            console.log(hasPermission);
+            if (!hasPermission){ this.requestPermissionVoice(); }
+          });
+        });
 
     
-    speechRecognition.hasPermission()
-    .then((hasPermission: boolean) => console.log(hasPermission))
-    
-    speechRecognition.requestPermission()
-    .then(
-      () => console.log('Granted'),
-      () => console.log('Denied')
-    )
-   
-  
-    
-   
     this.nom = navParams.get('nom');
     this.email = navParams.get('email');
 
   }
 
+private requestPermissionVoice(){
+  this.speechRecognition.requestPermission().then(
+    () => console.log('Granted'),
+    () => console.log('Denied')
+  )}
 
-listen(){
-  let options ;
+listen():void {
+  this.matches = [];
+  let options = {
+     language : 'fr-FR',
+     matches : 1 ,
+     prompt : "Je t'ecoute !" ,     
+     showPopup : true, 
+     showPartial  : false
+  }
   this.speechRecognition.startListening(options)
   .subscribe(
-    (matches: Array<string>) => console.log(matches),
-    (onerror) => console.log('error:', onerror)
+    (matches: Array<string>) => {
+    this.matches = matches;
+    this.changeDetectorRef.detectChanges();
+    },
+    (onerror) => {
+      console.log("Ya un problem");
+      this.changeDetectorRef.detectChanges();
+    }
   )
 
 }
+
   
   startScanning() {
     this.pairedDevices = null;
@@ -112,7 +136,7 @@ listen(){
   */
   }
 
-  sendS(){
+sendS(){
     this.bluetoothSerial.isConnected().then((success) => {
       this.bluetoothSerial.write("S");
    this.sVar = "S";
@@ -154,16 +178,7 @@ isConn(){
    this.conCheck = !this.conCheck;
 }
 
-
-
-
-
-
-
-
-
-  
-  disconnect() {
+disconnect() {
     let alert = this.alertCtrl.create({
       title: 'Disconnect?',
       message: 'Do you want to Disconnect?',

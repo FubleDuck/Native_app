@@ -3,6 +3,7 @@ import { NavController,NavParams } from 'ionic-angular';
 
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import { KoulchiPage } from '../koulchi/koulchi';
 
@@ -23,9 +24,19 @@ pairedDevices: any;
 gettingDevices: Boolean;
 conCheck: Boolean = false;
 
+variablesDekhlou : Boolean = false;
+avancer :string = '';
+reculer : string = '';
+td : string = '';
+tg : string = '';
 
 
-  constructor(public navCtrl: NavController, private navParams : NavParams, private bluetoothSerial: BluetoothSerial,private alertCtrl: AlertController) {
+
+  constructor(public navCtrl: NavController,
+     public navParams : NavParams,
+      private bluetoothSerial: BluetoothSerial,
+      private alertCtrl: AlertController,
+      private toastCtrl: ToastController) {
     bluetoothSerial.enable();
    
   
@@ -37,7 +48,22 @@ conCheck: Boolean = false;
   }
 
 
-
+  presentToastDefaultVar() {
+    let toast = this.toastCtrl.create({
+      message:  "Using Default Variables",
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+  presentToastCustomeVar() {
+      let toast = this.toastCtrl.create({
+        message: 'Using Costume Variables',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
 
 
   startScanning() {
@@ -99,28 +125,28 @@ conCheck: Boolean = false;
    this.sVar = "S";
             })
   } 
-sendA(){
+sendAvancer(){
   this.bluetoothSerial.isConnected().then((success) => {
-    this.bluetoothSerial.write("A");
- this.sVar = "A";
+    this.bluetoothSerial.write(this.avancer);
+ this.sVar = this.avancer;
           })
 }
-sendB(){
+sendGauche(){
   this.bluetoothSerial.isConnected().then((success) => {
-    this.bluetoothSerial.write("B");
-    this.sVar = "B";
+    this.bluetoothSerial.write(this.tg);
+    this.sVar = this.tg;
           })
 }
-sendC(){
+sendDroite(){
   this.bluetoothSerial.isConnected().then((success) => {
-    this.bluetoothSerial.write("C");
-    this.sVar = "C";
+    this.bluetoothSerial.write(this.td);
+    this.sVar = this.td;
           })
 }
-sendD(){
+sendReculer(){
   this.bluetoothSerial.isConnected().then((success) => {
-    this.bluetoothSerial.write("D");
-    this.sVar = "D";
+    this.bluetoothSerial.write(this.reculer);
+    this.sVar = this.reculer;
           })
 }
 sendE(){
@@ -169,6 +195,77 @@ isConn(){
   }
 
 
+  defaultVariable1(){
+    this.avancer = 'A';
+    this.reculer = 'B';
+    this.tg = 'C';
+    this.td = 'D';
+    this.variablesDekhlou = true;
+  }
+  defaultVariable(){
+    this.presentToastDefaultVar();
+    this.avancer = 'A';
+    this.reculer = 'B';
+    this.tg = 'C';
+    this.td = 'D';
+    this.variablesDekhlou = true;
+   
+  }
+
+  setVariable() {
+    let alert = this.alertCtrl.create({
+      title: 'Set Them',
+      inputs: [
+        {
+          name: 'avancer',
+          placeholder: 'Avancer'
+        },
+        {
+          name: 'reculer',
+          placeholder: 'Reculer',
+          
+        },
+        {
+          name: 'td',
+          placeholder: 'Droite',
+          
+        },
+        {
+          name: 'tg',
+          placeholder: 'Gauche',
+          
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            this.defaultVariable1();
+            this.presentToastDefaultVar();
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Set',
+          handler: data => {
+            if (data.avancer != '' && data.reculer != '' && data.td != '' && data.tg != '') {
+              this.avancer = data.avancer;
+              this.reculer = data.reculer;
+              this.td = data.td;
+              this.tg = data.tg;
+              this.variablesDekhlou = true;
+              this.presentToastCustomeVar();
+            } else {
+              this.variablesDekhlou = false;
+              return false;
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
+}
 
 
 
@@ -182,7 +279,7 @@ isConn(){
 
 
 
-  private goBack(){
+goBack(){
     this.navCtrl.push(KoulchiPage);
 
 }

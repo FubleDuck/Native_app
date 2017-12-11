@@ -17,45 +17,46 @@ export class KoulchiPage {
   nom : string;
   email : string;
 
-  constructor(public navCtrl: NavController, private navParams : NavParams ) {
+  constructor(public navCtrl: NavController, public navParams : NavParams ) {
     this.nom = navParams.get('nom');
     this.email = navParams.get('email');
 
     console.log(this.nom);
     console.log(this.email);
   }
-  private goToBluetooth(){
+  goToBluetooth(){
     this.navCtrl.push(BluetoothPage,{
       nom : this.nom,
       email : this.email,
   });
 }
 
-private goToAbout(){
+ goToAbout(){
   this.navCtrl.push(AboutPage)
 }
 
-private goToDist(){
+ goToDist(){
   this.navCtrl.push(DistPage);
 }
 
-private goTovoice(){
+ goTovoice(){
   this.navCtrl.push(VoicePage);
 }
 
-private goToWifi(){
+ goToWifi(){
   this.navCtrl.push(WifiPage);
 }
 
-/*private goToGyro(){
-  this.navCtrl.push(GyroPage);
+ goToVoice(){
+  this.navCtrl.push(VoicePage)
+  
 }
-
+/*
 private goToPresence(){
   this.navCtrl.push(PresencePage);
 }*/
 
-  private goHome(){
+   goHome(){
     this.navCtrl.push(HomePage);
 
 }

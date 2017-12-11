@@ -1,4 +1,4 @@
-<ion-header no-border>
+<ion-header no-border (tap)="popUpMe()">
 
     <ion-list>
         <ion-item color="dark">
@@ -87,7 +87,7 @@
     </ion-grid>
 
 
-    <img *ngIf="shPics == false" src="assets/geek.png">
+    <img (tap)="popUpHome()" *ngIf="shPics == false" src="assets/geek.png">
 
 
     <div *ngIf="shPics == true">
@@ -97,20 +97,13 @@
     </div>
 </ion-content>
 
-<ion-footer no-border>
+<ion-footer no-border (tap)="popUpHome()">
     <p style="text-align:center;">
+        Made with &nbsp;
         <ion-icon id="heart" style="color:red;font-size:25px;" name="heart"> </ion-icon> &nbsp; & &nbsp;
         <ion-icon style="color:orange; font-size:25px;" name="pizza"> </ion-icon>
     </p>
-    <ion-row style=" display: flex; align-items: center; justify-content: center;">
-        <a href="#">
-            <img style="height:30px" src="assets/octocat.png">
-        </a>
-        <h6>Ripo dyal l'app for dev</h6>
-        <a href="#">
-            <img style="height:30px" src="assets/octocat.png">
-        </a>
-    </ion-row>
+
     <!--<ion-item>
 
         <p style="text-align:center">Made with &nbsp;

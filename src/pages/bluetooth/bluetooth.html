@@ -3,15 +3,34 @@
 </ion-header>
 
 <ion-content>
-    <h5 style="text-align: center">Welcome {{nom}} to the bluetooth interface</h5>
+
 
 
 
     <ion-list padding>
         <div *ngIf="conCheck == true" id="conN">
-            <h5 style="color:green; text-align:center">Connected</h5>
+            <ion-grid>
+                <ion-row text-center>
+                    <ion-col col-6>
+                        <div id="conN">
+
+                            <button ion-button round outline color="secondary"> Connected
+                                        </button>
+                        </div>
+                    </ion-col>
+                    <ion-col col-6>
+                        <div id="conN">
+                            <button ion-button round color="danger" (click)="disconnect()">Disconnect</button>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
         </div>
+
+
         <div *ngIf="conCheck == false " id="notConn">
+            <h5 style="text-align: center">Welcome {{nom}} to the bluetooth interface</h5>
             <button ion-button block color="dark" (click)="startScanning()">scan</button>
             <ion-list-header>
                 Paired Devices
@@ -20,9 +39,7 @@
                 {{device.name}}
             </ion-item>
         </div>
-        <div *ngIf="conCheck == true" id="conN">
-            <button ion-button block color="danger" (click)="disconnect()">Disconnect</button>
-        </div>
+
         <div *ngIf="conCheck == false " id="notConn">
             <ion-list-header>
                 availlable Devices
@@ -36,23 +53,49 @@
         </div>
     </ion-list>
     <div *ngIf="conCheck == false ">
+
         <button ion-button block color="dark" (tap)="isConn()">Collapse</button>
     </div>
 
     <div *ngIf="conCheck == true">
-        <button ion-button block color="dark" (tap)="isConn()">Expand</button>
+        <button ion-button block outline round color="dark" (tap)="isConn()">Other Device</button>
     </div>
 
 
     <div *ngIf="conCheck == true ">
-        <br><br>
         <ion-grid>
+            <ion-row text-center>
+                <ion-col col-6>
+                    <button (tap)="setVariable()" style=" text-align:center;" ion-button block round color="secondary">
+                   Set Variables
+        </button>
+                </ion-col>
+                <ion-col col-6>
+                    <button (tap)="defaultVariable()" style=" text-align:center;" ion-button block round color="dark">
+                       Use Default
+        </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div *ngIf=" variablesDekhlou == false">
+            <br>
+            <ion-item padding>
+                <h4>Set Variables :</h4>
+                <p>You can costumise what each button sends.</p>
+
+                <h4>Default Variables :</h4>
+                <p> "Avancer : A" <br> "Reculer : B" <br> "Gauche : C" <br>"Droite : D" <br>"Stope :S"
+                </p>
+            </ion-item>
+        </div>
+        <br><br>
+        <ion-grid *ngIf="variablesDekhlou == true">
             <ion-row text-center>
                 <ion-col col-4>
 
                 </ion-col>
                 <ion-col col-4>
-                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendA()" (touchend)="sendS()" ion-button round outline icon-only>
+                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendAvancer()" (touchend)="sendS()" ion-button round outline icon-only>
                                 <ion-icon name="arrow-dropup"></ion-icon>
                               </button>
                 </ion-col>
@@ -63,7 +106,7 @@
 
             <ion-row text-center>
                 <ion-col col-4>
-                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendB()" (touchend)="sendS()" ion-button round outline icon-only>
+                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendGauche()" (touchend)="sendS()" ion-button round outline icon-only>
                                 <ion-icon name="arrow-dropleft"></ion-icon>
                               </button>
                 </ion-col>
@@ -71,7 +114,7 @@
                     <p>"{{ sVar }}"</p>
                 </ion-col>
                 <ion-col col-4>
-                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendC()" (touchend)="sendS()" ion-button round outline icon-only>
+                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendDroite()" (touchend)="sendS()" ion-button round outline icon-only>
                         <ion-icon name="arrow-dropright"></ion-icon>
                         </button>
                 </ion-col>
@@ -82,7 +125,7 @@
 
                 </ion-col>
                 <ion-col col-4>
-                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendD()" (touchend)="sendS()" ion-button round outline icon-only>
+                    <button style="font-size:40px;height:90px;width:90px" (touchstart)="sendReculer()" (touchend)="sendS()" ion-button round outline icon-only>
                                     <ion-icon name="arrow-dropdown"></ion-icon>
                                   </button>
                 </ion-col>
@@ -98,4 +141,29 @@
 
 
 
+
+
 </ion-content>
+
+<ion-footer no-border>
+    <p style="text-align:center;">
+        Made with &nbsp;
+        <ion-icon id="heart" style="color:red;font-size:25px;" name="heart"> </ion-icon> &nbsp; & &nbsp;
+        <ion-icon style="color:orange; font-size:25px;" name="pizza"> </ion-icon>
+    </p>
+
+    <!--<ion-item>
+    
+            <p style="text-align:center">Made with &nbsp;
+                <ion-icon style="color:red" name="heart"> </ion-icon> &nbsp; & &nbsp;
+                <ion-icon style="color:orange" name="pizza"> </ion-icon>
+    
+            </p>
+    
+        </ion-item>-->
+    <ion-fab right bottom>
+        <button (tap)="goBack()" ion-fab color="dark"><ion-icon name="home"></ion-icon></button>
+    </ion-fab>
+
+
+</ion-footer>

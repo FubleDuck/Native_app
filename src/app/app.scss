@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +12,22 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.alertCss {
+    // text color for basic alerts
+    color: white;
+    // alert modal page bg color. Warning this will remove the alert transparency
+    button {
+        border-radius: 50px !important;
+        color: rgb(0, 0, 0) !important; // button text color
+        background-color: rgb(118, 118, 118) !important;
+        //button bg color
+        text-align: center;
+    }
+    .alert-message {
+        color: white; // text color for confirm alerts
+    }
+    .alert-wrapper {
+        border-radius: 35px;
+        background-color: color($colors, dark, base); // bg color of alert content
+    }
+}

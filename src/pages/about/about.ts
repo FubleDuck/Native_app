@@ -13,17 +13,17 @@ export class AboutPage {
 
   
 
-  constructor(public navCtrl: NavController, private navParams : NavParams) {
+  constructor(public navCtrl: NavController, public navParams : NavParams) {
     
     
   }
   
-  private openOffice() {
+openOffice() {
     this.navCtrl.push(OfficePage);
   }
   
 
-  private goHome(){
+ goHome(){
     this.navCtrl.push(HomePage);
 
 }

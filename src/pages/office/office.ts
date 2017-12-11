@@ -57,7 +57,7 @@ constructor(public navCtrl: NavController, private navParams : NavParams) {
 
   
 
-  private goHome(){
+ goHome(){
     this.navCtrl.push(HomePage);
 
 }

@@ -3,15 +3,34 @@
 </ion-header>
 
 <ion-content>
+
     <h5 style="text-align: center">Welcome {{nom}} to the V.R interface</h5>
 
 
 
-    <ion-list padding>
-        <div *ngIf="conCheck == true" id="conN">
-            <h5 style="color:green; text-align:center">Connected</h5>
-        </div>
-        <div *ngIf="conCheck == false " id="notConn">
+    <div *ngIf="conCheck == true">
+        <ion-grid>
+            <ion-row text-center>
+                <ion-col col-6>
+                    <div id="conN">
+
+                        <button ion-button round outline color="secondary"> Connected
+                            </button>
+                    </div>
+                </ion-col>
+                <ion-col col-6>
+                    <div id="conN">
+                        <button ion-button round color="danger" (click)="disconnect()">Disconnect</button>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <button ion-button block color="dark" (tap)="isConn()">Other Device ?</button>
+    </div>
+
+    <div *ngIf="conCheck == false " id="notConn">
+        <ion-list padding>
             <button ion-button block color="dark" (click)="startScanning()">scan</button>
             <ion-list-header>
                 Paired Devices
@@ -19,53 +38,49 @@
             <ion-item *ngFor="let device of pairedDevices">
                 {{device.name}}
             </ion-item>
-        </div>
-        <div *ngIf="conCheck == true" id="conN">
-            <button ion-button block color="danger" (click)="disconnect()">Disconnect</button>
-        </div>
-        <div *ngIf="conCheck == false " id="notConn">
+
+
             <ion-list-header>
                 availlable Devices
             </ion-list-header>
             <ion-item *ngFor='let device of unpairedDevices'>
                 <span (click)="selectDevice(device.address)">
-            {{device.name}}
-          </span>
+          {{device.name}}
+        </span>
             </ion-item>
             <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
-        </div>
-    </ion-list>
-    <div *ngIf="conCheck == false ">
+
+
+        </ion-list>
+
+
         <button ion-button block color="dark" (tap)="isConn()">Collapse</button>
     </div>
 
-    <div *ngIf="conCheck == true">
-        <button ion-button block color="dark" (tap)="isConn()">Expand</button>
-    </div>
 
 
     <div *ngIf="conCheck == true ">
-        <br><br>
+        <br>
+        <br>
+        <br>
         <ion-grid>
             <ion-row text-center>
                 <ion-col col-4>
 
                 </ion-col>
-                <ion-col col-4>
-                    <button ion-button block color="primary" (tap)="listen()">
-                             Speeck
-                              </button>
+                <ion-col (tap)="listen()" col-4>
+                    <img src="assets/imgs/voicestart.png" />
                 </ion-col>
                 <ion-col col-4>
-                    {{ matches}}
+
                 </ion-col>
+                <br>
+                <h4 style="text-align: center">{{matches}}</h4>
             </ion-row>
 
-
-
-
         </ion-grid>
-        <br><br>
+        <br>
+        <br>
 
 
     </div>
@@ -73,3 +88,26 @@
 
 
 </ion-content>
+
+<ion-footer no-border>
+    <p style="text-align:center;">
+        Made with &nbsp;
+        <ion-icon id="heart" style="color:red;font-size:25px;" name="heart"> </ion-icon> &nbsp; & &nbsp;
+        <ion-icon style="color:orange; font-size:25px;" name="pizza"> </ion-icon>
+    </p>
+
+    <!--<ion-item>
+        
+                <p style="text-align:center">Made with &nbsp;
+                    <ion-icon style="color:red" name="heart"> </ion-icon> &nbsp; & &nbsp;
+                    <ion-icon style="color:orange" name="pizza"> </ion-icon>
+        
+                </p>
+        
+            </ion-item>-->
+
+    <ion-fab right bottom>
+        <button (tap)="goBack()" ion-fab color="dark"><ion-icon name="home"></ion-icon></button>
+    </ion-fab>
+
+</ion-footer>
